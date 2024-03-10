@@ -11,44 +11,36 @@
       :theme="theme"
       @option-selected="select_option"
     />
-    <button
-      v-if="selected_option !== null && submitted_option === null"
-      class="answer-options__button"
-      @click="submit_answer"
-    >
-      Подтвердить ответ
-    </button>
-    <button v-if="selected_option === null" class="answer-options__button">
-      Выберите ответ
-    </button>
-    <button
-      v-if="submitted_option !== null && !is_quiz_ended"
-      class="answer-options__button"
-      @click="next_question"
-    >
-      Следующий вопрос
-    </button>
-    <button
-      v-if="submitted_option !== null && is_quiz_ended"
-      class="answer-options__button"
-      @click="finish_quiz"
-    >
-      Завершить квиз
-    </button>
+    <AnswerButton
+      :selected_option="selected_option"
+      :submitted_option="submitted_option"
+      :is_quiz_ended="is_quiz_ended"
+      @answer-submitted="submit_answer"
+      @next-question-requested="next_question"
+      @quiz-finished="finish_quiz"
+    />
   </div>
 </template>
 
 <script>
 import Option from "./Option.vue";
+import AnswerButton from "./AnswerButton.vue";
 export default {
   components: {
     Option,
+    AnswerButton,
   },
   props: {
     options: Array,
     answer: Number,
     is_quiz_ended: Boolean,
     theme: String,
+  },
+  data() {
+    return {
+      selected_option: null,
+      submitted_option: null,
+    };
   },
   methods: {
     select_option(option_number) {
@@ -70,12 +62,6 @@ export default {
       this.submitted_option = null;
     },
   },
-  data() {
-    return {
-      selected_option: null,
-      submitted_option: null,
-    };
-  },
 };
 </script>
 
@@ -84,19 +70,6 @@ export default {
   width: 50%;
 }
 
-.answer-options__button {
-  background-color: var(--purple);
-  height: 92px;
-  border-radius: 24px;
-  cursor: pointer;
-  display: flex;
-  font-size: 28px;
-  color: var(--pure-white);
-  justify-content: center;
-  align-items: center;
-  border: transparent;
-  width: 100%;
-}
 @media (min-width: 768px) and (max-width: 1024px) {
   .answer-options {
     width: 100%;
@@ -105,11 +78,6 @@ export default {
 @media (max-width: 768px) {
   .answer-options {
     width: 100%;
-  }
-  .answer-options__button {
-    height: 56px;
-    font-size: 18px;
-    border-radius: 12px;
   }
 }
 </style>
