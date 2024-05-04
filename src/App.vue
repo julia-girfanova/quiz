@@ -20,6 +20,8 @@
       :theme="theme"
       @restart="restart"
     />
+    <CreateQuizPage v-if="page === 'CreateQuizPage'" />
+    <AddQuestionPage v-if="page === 'AddQuestionPage'" />
   </div>
 </template>
 
@@ -28,6 +30,8 @@ import TopHeader from "./components/TopHeader.vue";
 import StartPage from "./components/StartPage.vue";
 import QuestionPage from "./components/QuestionPage.vue";
 import ResultsPage from "./components/ResultsPage.vue";
+import CreateQuizPage from "./components/CreateQuizPage.vue";
+import AddQuestionPage from "./components/AddQuestionPage.vue";
 
 export default {
   components: {
@@ -35,42 +39,21 @@ export default {
     StartPage,
     QuestionPage,
     ResultsPage,
+    CreateQuizPage,
+    AddQuestionPage,
+  },
+  async created() {
+    let quizes = await fetch("https://2b091a404839ee74.mokky.dev/quizes", {
+      method: "GET",
+    });
+    this.quiz_list = await quizes.json();
   },
   data() {
     return {
       quiz_id: null,
-      quiz_list: [
-        {
-          id: "the_sopranos",
-          name: "Клан Сопрано",
-          icon: "/icon-sopranos.jpeg",
-          icon_background: "#e0fdef",
-          questions: [
-            {
-              text: "Кто из этих людей стал стучать на мафию?",
-              options: [
-                "Дженис Сопрано",
-                "Джонни Сек",
-                "Сальваторе Банпеньсьеро",
-                "Петси Парисси",
-              ],
-              answer: 2,
-            },
-            {
-              text: "Кто убил Ричи Априла?",
-              options: [
-                "Тони Сопрано",
-                "Кристофер Молтисанти",
-                "Дженис Сопрано",
-                "Джуниор Сопрано",
-              ],
-              answer: 2,
-            },
-          ],
-        },
-      ],
+      quiz_list: [],
       theme: "light",
-      page: "StartPage",
+      page: "AddQuestionPage",
       score: 0,
     };
   },
