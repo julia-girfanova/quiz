@@ -42,9 +42,11 @@ export default {};
 }
 .add-question__text {
   flex-grow: 1;
+  flex-basis: 535px;
 }
 .add-question__options {
   flex-grow: 1;
+  flex-basis: 535px;
 }
 .add-question__option {
   background-color: var(--navy);
@@ -79,5 +81,17 @@ export default {};
   background-color: var(--navy);
   border-radius: 24px;
   width: 100%;
+  color: var(--pure-white);
+  resize: none;
+  height: 440px;
+  border: none;
+  font-family: Rubik;
+  padding: 20px;
+  outline: none;
+  font-size: 28px;
+}
+.add-question__textarea::placeholder {
+  color: var(--light-blurish);
+  font-size: 28px;
 }
 </style>
