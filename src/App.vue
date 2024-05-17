@@ -53,7 +53,7 @@ export default {
       quiz_id: null,
       quiz_list: [],
       theme: "light",
-      page: "AddQuestionPage",
+      page: "CreateQuizPage",
       score: 0,
     };
   },

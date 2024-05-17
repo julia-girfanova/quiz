@@ -2,9 +2,7 @@
   <div class="create-quiz-page">
     <div class="new-quiz">
       <div class="quiz-info">
-        <div class="quiz-info__icon">
-          <img class="quiz-info__plus" src="/plus.svg" />
-        </div>
+        <NewQuizLogo />
         <input class="quiz-info__name" placeholder="Введите нажвание" />
       </div>
       <button class="new-quiz__save">Сохранить опрос</button>
@@ -24,7 +22,14 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import NewQuizLogo from "./NewQuizLogo.vue";
+export default {
+  components: {
+    NewQuizLogo,
+  },
+};
+</script>
 
 <style>
 .create-quiz-page {
@@ -43,16 +48,7 @@
   display: flex;
   padding: 20px;
 }
-.quiz-info__icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
-  background-color: var(--pure-white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
+
 .quiz-info__name {
   background-color: transparent;
   border: none;
@@ -64,10 +60,7 @@
 .quiz-info__name::placeholder {
   color: var(--light-blurish);
 }
-.quiz-info__plus {
-  width: 30px;
-  height: 30px;
-}
+
 .questions__plus {
   width: 30px;
   height: 30px;
