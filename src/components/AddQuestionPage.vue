@@ -7,29 +7,35 @@
       ></textarea>
     </div>
     <div class="add-question__options">
-      <div class="add-question__option">
-        <div class="option__letter">A</div>
-        <input class="option__text" placeholder="Вариант ответа" />
-      </div>
-      <div class="add-question__option">
-        <div class="option__letter">B</div>
-        <input class="option__text" placeholder="Вариант ответа" />
-      </div>
-      <div class="add-question__option">
-        <div class="option__letter">C</div>
-        <input class="option__text" placeholder="Вариант ответа" />
-      </div>
-      <div class="add-question__option">
-        <div class="option__letter">D</div>
-        <input class="option__text" placeholder="Вариант ответа" />
-      </div>
+      <NewQuestionOption
+        v-for="(option, index) of options"
+        :key="index"
+        :number="index"
+        :text="option"
+        @update:text="update_option_text"
+      />
       <button class="add-question__save">Сохранить вопрос</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import NewQuestionOption from "./QuestionEditor/NewQuestionOption.vue";
+export default {
+  components: {
+    NewQuestionOption,
+  },
+  data() {
+    return {
+      options: ["1111", "", "3", ""],
+    };
+  },
+  methods: {
+    update_option_text(text, number) {
+      this.options[number] = text;
+    },
+  },
+};
 </script>
 
 <style>
@@ -48,22 +54,7 @@ export default {};
   flex-grow: 1;
   flex-basis: 535px;
 }
-.add-question__option {
-  background-color: var(--navy);
-  margin-bottom: 20px;
-  display: flex;
-  border-radius: 24px;
-  padding: 20px;
-}
-.option__text {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: var(--pure-white);
-}
-.option__text::placeholder {
-  color: var(--light-blurish);
-}
+
 .add-question__save {
   background-color: var(--purple);
   height: 92px;

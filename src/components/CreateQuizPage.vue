@@ -3,14 +3,14 @@
     <div class="new-quiz">
       <div class="quiz-info">
         <NewQuizLogo />
-        <input class="quiz-info__name" placeholder="Введите нажвание" />
+        <NewQuizName />
       </div>
       <button class="new-quiz__save">Сохранить опрос</button>
     </div>
     <div class="questions">
       <div class="questions__summary">
         <p class="questions__count">0 вопросов</p>
-        <button class="questions__add">
+        <button @click="$emit('show-question-editor')" class="questions__add">
           <img class="questions__plus" src="/plus.svg" />
         </button>
       </div>
@@ -24,9 +24,11 @@
 
 <script>
 import NewQuizLogo from "./NewQuizLogo.vue";
+import NewQuizName from "./NewQuizName.vue";
 export default {
   components: {
     NewQuizLogo,
+    NewQuizName,
   },
 };
 </script>
@@ -47,18 +49,6 @@ export default {
   background-color: var(--navy);
   display: flex;
   padding: 20px;
-}
-
-.quiz-info__name {
-  background-color: transparent;
-  border: none;
-  font-size: 28px;
-  color: var(--pure-white);
-  margin-left: 30px;
-  outline: none;
-}
-.quiz-info__name::placeholder {
-  color: var(--light-blurish);
 }
 
 .questions__plus {

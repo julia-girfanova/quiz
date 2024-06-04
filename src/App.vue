@@ -20,7 +20,10 @@
       :theme="theme"
       @restart="restart"
     />
-    <CreateQuizPage v-if="page === 'CreateQuizPage'" />
+    <CreateQuizPage
+      v-if="page === 'CreateQuizPage'"
+      @show-question-editor="show_question_editor"
+    />
     <AddQuestionPage v-if="page === 'AddQuestionPage'" />
   </div>
 </template>
@@ -77,6 +80,9 @@ export default {
     restart() {
       this.page = "StartPage";
       this.quiz_id = null;
+    },
+    show_question_editor() {
+      this.page = "AddQuestionPage";
     },
   },
 };
